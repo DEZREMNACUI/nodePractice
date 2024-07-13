@@ -1,6 +1,6 @@
 import { Context } from "koa";
 import { app } from "../src/app";
-import { NAME_IS_NOT_EXISTS, NAME_OR_PASSWORD_IS_REQUIRED, PASSWORD_IS_NOT_CORRENT, UNAUTHORIZATION, USER_IS_ALREADY_EXIST } from "../src/config/error";
+import { NAME_IS_NOT_EXISTS, NAME_OR_PASSWORD_IS_REQUIRED, PASSWORD_IS_NOT_CORRENT, PERMISSION_IS_NOT_ALLOWED, UNAUTHORIZATION, USER_IS_ALREADY_EXIST } from "../src/config/error";
 
 app.on("error", (error: string, ctx: Context) => {
   let code = 0;
@@ -26,6 +26,10 @@ app.on("error", (error: string, ctx: Context) => {
     case UNAUTHORIZATION:
       code = -1005;
       message = "没有授权(token不正确)";
+      break;
+    case PERMISSION_IS_NOT_ALLOWED:
+      code = -2001;
+      message = "没有操作该资源的权限";
       break;
   }
 

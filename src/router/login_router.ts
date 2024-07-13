@@ -9,3 +9,4 @@ loginRouter.post("/", verifyLogin, loginController.sign);
 
 loginRouter.get("/test", verifyAuth,loginController.test);
 
+export default loginRouter;

@@ -8,7 +8,7 @@ class LoginController {
   sign = (ctx: Context, next: Next) => {
     const { id, name } = ctx.user;
     const token = jwt.sign({ id, name }, PRIVATE_KEY, {
-      expiresIn: 24 * 60 * 60,
+      expiresIn: "1d",
       algorithm: "RS256"
     });
 

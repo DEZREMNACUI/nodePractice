@@ -9,3 +9,5 @@ useRouter.post("/", verifyUser, handlePassword, userController.create);
 useRouter.get("/list", (ctx, next) => {
   ctx.body = "user list";
 });
+
+export default useRouter;

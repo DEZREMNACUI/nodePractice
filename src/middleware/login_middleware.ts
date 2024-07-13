@@ -30,12 +30,14 @@ export const verifyLogin = async (ctx: Context, next: Next) => {
 
 export const verifyAuth = async (ctx: Context, next: Next) => {
   const authorization = ctx.headers.authorization;
+  if (!authorization) {
+    return ctx.app.emit("error", UNAUTHORIZATION, ctx);
+  }
   const token = authorization?.replace("Bearer ", "");
   try {
     const result = jwt.verify(token as string, PUBLIC_KEY, {
       algorithms: ["RS256"]
     })
-
     ctx.user = result;
 
     await next()
