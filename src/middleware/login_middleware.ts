@@ -39,7 +39,6 @@ export const verifyAuth = async (ctx: Context, next: Next) => {
       algorithms: ["RS256"]
     })
     ctx.user = result;
-
     await next()
   } catch (error) {
     ctx.app.emit("error", UNAUTHORIZATION, ctx);

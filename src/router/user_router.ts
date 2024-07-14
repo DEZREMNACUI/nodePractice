@@ -10,4 +10,6 @@ useRouter.get("/list", (ctx, next) => {
   ctx.body = "user list";
 });
 
+useRouter.get("/avatar/:userId", userController.showAvatarImage);
+
 export default useRouter;

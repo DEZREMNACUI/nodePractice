@@ -11,6 +11,5 @@ export const verifyPermisson = (resourceName: string) => async (ctx: Context, ne
     ctx.app.emit("error", PERMISSION_IS_NOT_ALLOWED, ctx);
     return;
   }
-
   await next();
 }

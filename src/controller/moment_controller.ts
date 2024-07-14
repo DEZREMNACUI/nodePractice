@@ -55,6 +55,29 @@ class MomentController {
       data: result
     }
   }
+
+  addLabels = async (ctx: Context, next: Next) => {
+    const { labels } = ctx as any as { labels: Array<{ name: string, id: string }> };
+    const { momentId } = ctx.params as { momentId: string };
+    try {
+      for (const label of labels) {
+        const isExists = await momentService.hasLabel(momentId, label.id);
+        if (!isExists) {
+          const result = await momentService.addLabel(momentId, label.id);
+          ctx.body = {
+            code: 0,
+            message: "为动态添加标签成功",
+            data: result
+          }
+        }
+      }
+    } catch (error) {
+      ctx.body = {
+        code: -3001,
+        message: "为动态添加标签失败"
+      }
+    }
+  }
 }
 
 export const momentController = new MomentController();
